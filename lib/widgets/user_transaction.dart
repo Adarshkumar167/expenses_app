@@ -16,12 +16,12 @@ class _UserTransactionState extends State<UserTransaction> {
     Transaction(
       id: 't1',
       title: 'Kadhai Paneer',
-      amount: 110.00,
+      amount: 70.00,
       date: DateTime.now(),
     ),
     Transaction(
       id: 't2',
-      title: 'Halke Fulke',
+      title: 'Roti',
       amount: 10.00,
       date: DateTime.now(),
     ),
