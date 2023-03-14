@@ -6,21 +6,29 @@ import '../models/transaction.dart';
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransactions;
 
-  Chart(this.recentTransactions);
+  const Chart(this.recentTransactions, {super.key});
 
   List<Map<String, Object>> get groupedTransactionsValues {
     return List.generate(7, (index) {
       final weekDay = DateTime.now().subtract(
         Duration(days: index),
       );
-      double totalSum;
+      double totalSum = 0;
 
-      for (var i = 0; i < recentTransactions.length; i++) {}
-      return {'day': DateFormat.E(weekDay), 'amount': 9.99};
+      for (var i = 0; i < recentTransactions.length; i++) {
+        if (recentTransactions[i].date.day == weekDay.day &&
+            recentTransactions[i].date.month == weekDay.month &&
+            recentTransactions[i].date.year == weekDay.year) {
+          totalSum += recentTransactions[i].amount;
+        }
+      }
+
+      return {
+        'day': DateFormat.E().format(weekDay),
+        'amount': totalSum,
+      };
     });
   }
-
-  const Chart({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +36,7 @@ class Chart extends StatelessWidget {
       elevation: 6,
       margin: const EdgeInsets.all(20),
       child: Row(
-        children: <Widget>[],
+        children: const <Widget>[],
       ),
     );
   }
