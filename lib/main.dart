@@ -57,7 +57,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -117,6 +116,12 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  void _deleteTransactions(String id) {
+    setState(() {
+      _userTransaction.removeWhere((tx) => tx.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,9 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransactions),
-            TransactionList(
-              _userTransaction,
-            ),
+            TransactionList(_userTransaction, _deleteTransactions),
           ],
         ),
       ),
